@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="weather-card">
+        <!-- Header & Search -->
+        <div class="header-search">
+            <button class="menu-button"><i class="fas fa-bars"></i></button>
+            <div class="search-input-container">
+                <input type="text" id="city-input" placeholder="Enter city name" class="search-input">
+            </div>
+            <button id="search-button" class="search-button"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Current Weather Display -->
+        <div class="current-weather-display">
+            <h2 id="location-name" class="location-name">London</h2>
+            <p id="weather-description" class="weather-description">Sunny, sometimes overcast</p>
+            <div class="main-weather-info">
+                <i id="main-weather-icon" class="fas fa-cloud icon-large"></i>
+                <span id="current-temp" class="current-temp">27°</span>
+            </div>
+        </div>
+
+        <!-- Weather Details -->
+        <div class="weather-details-grid">
+            <div class="detail-item">
+                <i class="fas fa-wind wind-icon"></i>
+                <span id="wind-speed">15 km/h</span>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-tint humidity-icon"></i>
+                <span id="humidity">65%</span>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-sun uv-icon"></i>
+                <span id="uv-index">Low UV</span>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-smog pollution-icon"></i>
+                <span id="pollution">Low Pollution</span>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-tree pollen-icon"></i>
+                <span id="pollen">Low Pollen</span>
+            </div>
+        </div>
+
+        <!-- Daily Forecast -->
+        <div class="daily-forecast-section">
+            <h3 class="daily-forecast-title">Daily Forecast</h3>
+            <div id="forecast-container" class="forecast-container">
+                <!-- Forecast items will be injected here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
