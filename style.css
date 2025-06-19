@@ -140,11 +140,6 @@ body {
 .pollution-icon { color: #6b7280; /* Tailwind gray-500 */ }
 .pollen-icon { color: #22c55e; /* Tailwind green-500 */ }
 
-
-.daily-forecast-section {
-    /* No specific styling for the section div itself in Tailwind, often just a container */
-}
-
 .daily-forecast-title {
     font-size: 1.25rem; /* 20px */
     font-weight: 600;
