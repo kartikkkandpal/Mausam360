@@ -16,7 +16,6 @@
   </video>
 
   <div class="weather-card">
-    <!-- Left Side -->
     <div class="left-column">
       <div class="header-search">
         <button class="menu-button"><i class="fas fa-bars"></i></button>
@@ -27,26 +26,28 @@
         <button id="search-button" class="search-button"><i class="fas fa-search"></i></button>
       </div>
 
-      <div class="toggles">
-        <div class="toggle-item">
-          <label class="switch">
-            <input type="checkbox" id="unit-toggle">
-            <span class="slider round"></span>
-          </label>
-          <span class="toggle-label">°C / °F</span>
-        </div>
-        <div class="toggle-item">
-          <label class="switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider round"></span>
-          </label>
-          <span class="toggle-label">Dark / Light</span>
+      <div class="toggles-row">
+        <p id="current-date" class="date-text">Date here</p>
+        <div class="toggles">
+          <div class="toggle-item">
+            <label class="switch">
+              <input type="checkbox" id="unit-toggle">
+              <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">°C / °F</span>
+          </div>
+          <div class="toggle-item">
+            <label class="switch">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">Dark / Light</span>
+          </div>
         </div>
       </div>
 
       <div class="current-weather-display">
         <h2 id="location-name">London</h2>
-        <p id="current-date" class="date-text"></p>
         <p id="weather-description">Sunny</p>
         <div class="main-weather-info">
           <i id="main-weather-icon" class="fas fa-sun icon-large"></i>
@@ -64,11 +65,10 @@
 
       <div class="daily-forecast-section">
         <h3 class="daily-forecast-title">Daily Forecast</h3>
-        <div id="forecast-container" class="forecast-container"></div>
+        <div id="forecast-container" class="forecast-container-vertical"></div>
       </div>
     </div>
 
-    <!-- Right Side (Chart) -->
     <div class="right-column">
       <div class="chart-section">
         <h3 class="daily-forecast-title">Temperature Trends</h3>
