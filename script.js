@@ -13,14 +13,13 @@ const uvIndex = document.getElementById('uv-index');
 const pollution = document.getElementById('pollution');
 const pollen = document.getElementById('pollen');
 const forecastContainer = document.getElementById('forecast-container');
+const errorMsg = document.getElementById('error-msg');
 const unitToggle = document.getElementById('unit-toggle');
 const themeToggle = document.getElementById('theme-toggle');
-const errorMsg = document.getElementById('error-msg');
+const currentDate = document.getElementById('current-date');
 
 let isCelsius = true;
-let currentTempCelsius = null;
-let forecastTemps = [];
-let tempChart = null;
+let chartInstance = null;
 
 function getWeatherIcon(iconCode) {
   if (iconCode.includes('01')) return 'fa-sun';
@@ -40,15 +39,15 @@ function showError(message) {
 async function getWeatherData(city) {
   errorMsg.textContent = '';
   try {
-    const currentWeatherResponse = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
-    if (!currentWeatherResponse.ok) throw new Error('City not found');
-    const current = await currentWeatherResponse.json();
+    const weatherRes = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    if (!weatherRes.ok) throw new Error('City not found');
+    const current = await weatherRes.json();
 
-    const forecastResponse = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`);
-    const forecast = await forecastResponse.json();
+    const forecastRes = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`);
+    if (!forecastRes.ok) throw new Error('Forecast not found');
+    const forecast = await forecastRes.json();
 
     const uv = { value: Math.floor(Math.random() * 10) + 1 };
-
     return { current, forecast, uv };
   } catch (error) {
     showError(error.message);
@@ -56,100 +55,103 @@ async function getWeatherData(city) {
   }
 }
 
+function renderChart(labels, temps) {
+  const ctx = document.getElementById('tempChart').getContext('2d');
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: `Temp (${isCelsius ? '°C' : '°F'})`,
+        data: temps,
+        backgroundColor: 'rgba(0, 204, 255, 0.2)',
+        borderColor: 'rgba(0, 204, 255, 1)',
+        borderWidth: 2,
+        tension: 0.4,
+        pointBackgroundColor: '#fff',
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: {
+            callback: value => `${value}°`
+          }
+        }
+      }
+    }
+  });
+}
+
+function convertTemp(temp) {
+  return isCelsius ? `${Math.round(temp)}°C` : `${Math.round(temp * 9 / 5 + 32)}°F`;
+}
+
 function renderWeatherData(data) {
   if (!data) return;
-  const { current, forecast, uv } = data;
 
+  const { current, forecast, uv } = data;
   locationName.textContent = current.name;
   weatherDescription.textContent = current.weather[0].description;
   mainWeatherIcon.className = `fas ${getWeatherIcon(current.weather[0].icon)} icon-large`;
-
-  currentTempCelsius = current.main.temp;
-  updateTemperatureDisplay();
-
+  currentTemp.textContent = convertTemp(current.main.temp);
   windSpeed.textContent = `${Math.round(current.wind.speed * 3.6)} km/h`;
   humidity.textContent = `${current.main.humidity}%`;
   uvIndex.textContent = `UV ${uv.value <= 2 ? 'Low' : uv.value <= 5 ? 'Moderate' : 'High'}`;
   pollution.textContent = 'Low Pollution';
   pollen.textContent = 'Low Pollen';
 
-  forecastContainer.innerHTML = '';
-  forecastTemps = [];
-  const labels = [];
+  const today = new Date();
+  currentDate.textContent = today.toLocaleDateString('en-GB', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
   const dailyForecasts = {};
   forecast.list.forEach(item => {
-    const date = new Date(item.dt * 1000);
-    const dateKey = date.toISOString().split('T')[0];
-    const day = date.toLocaleDateString('en-US', { weekday: 'short' });
-    const fullDate = date.toLocaleDateString('en-GB');
+    const dateObj = new Date(item.dt * 1000);
+    const dateKey = dateObj.toISOString().split('T')[0];
     if (!dailyForecasts[dateKey]) {
-      dailyForecasts[dateKey] = { day, fullDate, temp: Math.round(item.main.temp), icon: item.weather[0].icon };
+      dailyForecasts[dateKey] = {
+        day: dateObj.toLocaleString('en-US', { weekday: 'short' }),
+        date: dateObj.toLocaleDateString('en-GB'),
+        temp: item.main.temp,
+        icon: item.weather[0].icon
+      };
     }
   });
 
-  const today = new Date().toISOString().split('T')[0];
+  const todayKey = today.toISOString().split('T')[0];
+  const sortedDates = Object.keys(dailyForecasts).sort();
   let count = 0;
-  for (let key of Object.keys(dailyForecasts)) {
-    if (key === today || count >= 4) continue;
-    const f = dailyForecasts[key];
-    forecastTemps.push(f.temp);
-    labels.push(f.day);
+  const labels = [], temps = [];
+  forecastContainer.innerHTML = '';
 
-    forecastContainer.innerHTML += `
-      <div class="forecast-card">
-        <i class="fas ${getWeatherIcon(f.icon)} forecast-icon"></i>
-        <div class="forecast-details">
-          <div class="day-of-week">${f.day}</div>
-          <div class="forecast-date">${f.fullDate}</div>
-          <div class="forecast-temp">${Math.round(isCelsius ? f.temp : (f.temp * 9/5 + 32))}${isCelsius ? '°C' : '°F'}</div>
-        </div>
-      </div>`;
-    count++;
-  }
-
-  renderChart(labels, forecastTemps);
-}
-
-function updateTemperatureDisplay() {
-  if (currentTempCelsius !== null) {
-    const temp = isCelsius ? currentTempCelsius : (currentTempCelsius * 9 / 5 + 32);
-    currentTemp.textContent = `${Math.round(temp)}${isCelsius ? '°C' : '°F'}`;
-  }
-
-  const forecastCards = document.querySelectorAll('.forecast-card');
-  forecastCards.forEach((card, i) => {
-    const temp = isCelsius ? forecastTemps[i] : (forecastTemps[i] * 9 / 5 + 32);
-    card.querySelector('.forecast-temp').textContent = `${Math.round(temp)}${isCelsius ? '°C' : '°F'}`;
-  });
-
-  renderChart(forecastTemps.map((_, i) => `Day ${i + 1}`), forecastTemps);
-}
-
-function renderChart(labels, temps) {
-  const ctx = document.getElementById('tempChart').getContext('2d');
-  if (tempChart) tempChart.destroy();
-
-  const data = isCelsius ? temps : temps.map(t => (t * 9 / 5 + 32));
-  tempChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: `Temperature (${isCelsius ? '°C' : '°F'})`,
-        data,
-        borderColor: '#4fc3f7',
-        backgroundColor: 'rgba(79, 195, 247, 0.2)',
-        tension: 0.3,
-        fill: true,
-        pointRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: false } }
+  for (const date of sortedDates) {
+    if (date === todayKey) continue;
+    const f = dailyForecasts[date];
+    if (count < 4) {
+      forecastContainer.innerHTML += `
+        <div class="forecast-card">
+          <i class="fas ${getWeatherIcon(f.icon)} forecast-icon"></i>
+          <div class="forecast-details">
+            <span class="day-of-week">${f.day}</span>
+            <span class="forecast-date">${f.date}</span>
+          </div>
+          <span class="forecast-temp">${convertTemp(f.temp)}</span>
+        </div>`;
+      labels.push(f.day);
+      temps.push(isCelsius ? f.temp : (f.temp * 9 / 5 + 32));
+      count++;
     }
-  });
+  }
+
+  renderChart(labels, temps);
 }
 
 searchButton.addEventListener('click', async () => {
@@ -164,15 +166,17 @@ cityInput.addEventListener('keypress', e => {
 });
 
 unitToggle.addEventListener('change', () => {
-  isCelsius = !isCelsius;
-  updateTemperatureDisplay();
+  isCelsius = !unitToggle.checked;
+  const city = locationName.textContent;
+  if (city) getWeatherData(city).then(renderWeatherData);
 });
 
 themeToggle.addEventListener('change', () => {
-  document.body.classList.toggle('light-mode');
+  document.body.classList.toggle('light-mode', themeToggle.checked);
 });
 
 window.onload = async () => {
-  const data = await getWeatherData('London');
+  const defaultCity = 'London';
+  const data = await getWeatherData(defaultCity);
   renderWeatherData(data);
 };
