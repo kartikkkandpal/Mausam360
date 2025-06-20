@@ -16,7 +16,7 @@
   </video>
 
   <div class="weather-card">
-    <!-- Left Panel -->
+    <!-- Left Side -->
     <div class="left-column">
       <div class="header-search">
         <button class="menu-button"><i class="fas fa-bars"></i></button>
@@ -45,8 +45,9 @@
       </div>
 
       <div class="current-weather-display">
-        <h2 id="location-name" class="location-name">London</h2>
-        <p id="weather-description" class="weather-description">Sunny</p>
+        <h2 id="location-name">London</h2>
+        <p id="current-date" class="date-text"></p>
+        <p id="weather-description">Sunny</p>
         <div class="main-weather-info">
           <i id="main-weather-icon" class="fas fa-sun icon-large"></i>
           <span id="current-temp" class="current-temp">27°C</span>
@@ -60,14 +61,15 @@
         <div class="detail-item"><i class="fas fa-smog"></i><span id="pollution">Low Pollution</span></div>
         <div class="detail-item"><i class="fas fa-tree"></i><span id="pollen">Low Pollen</span></div>
       </div>
-    </div>
 
-    <!-- Right Panel -->
-    <div class="right-column">
       <div class="daily-forecast-section">
         <h3 class="daily-forecast-title">Daily Forecast</h3>
         <div id="forecast-container" class="forecast-container"></div>
       </div>
+    </div>
+
+    <!-- Right Side (Chart) -->
+    <div class="right-column">
       <div class="chart-section">
         <h3 class="daily-forecast-title">Temperature Trends</h3>
         <canvas id="tempChart"></canvas>
