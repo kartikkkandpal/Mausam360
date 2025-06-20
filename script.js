@@ -34,6 +34,8 @@ function getWeatherIcon(iconCode) {
 
 function showError(message) {
   errorMsg.textContent = message;
+  errorMsg.style.color = '#ff4d4d';
+  errorMsg.style.fontSize = '0.8rem';
 }
 
 async function getWeatherData(city) {
