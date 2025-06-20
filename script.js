@@ -1,8 +1,4 @@
-// --- OpenWeatherMap API Key ---
-// You need to get your own API key from OpenWeatherMap.
-// Go to https://openweathermap.org/api and sign up for a free account.
-// Once you have your key, replace 'YOUR_OPENWEATHER_API_KEY' below with it.
-const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a'; // Replace with your actual API key
+const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a'; 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 // --- DOM Elements ---
@@ -21,8 +17,6 @@ const forecastContainer = document.getElementById('forecast-container');
 
 // --- Helper Function to Get Weather Icon based on OpenWeatherMap ID ---
 function getWeatherIcon(iconCode) {
-    // Mapping OpenWeatherMap icon codes to Font Awesome icons
-    // This is a simplified mapping, you can expand it for more specific icons
     if (iconCode.includes('01')) return 'fa-sun'; // Clear sky
     if (iconCode.includes('02')) return 'fa-cloud-sun'; // Few clouds
     if (iconCode.includes('03') || iconCode.includes('04')) return 'fa-cloud'; // Scattered/Broken clouds
