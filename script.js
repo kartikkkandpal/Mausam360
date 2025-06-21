@@ -21,6 +21,7 @@ const currentDate = document.getElementById('current-date');
 let isCelsius = true;
 let chartInstance = null;
 
+// Maps OpenWeather icons to Font Awesome
 function getWeatherIcon(iconCode) {
   if (iconCode.includes('01')) return 'fa-sun';
   if (iconCode.includes('02')) return 'fa-cloud-sun';
@@ -49,7 +50,7 @@ async function getWeatherData(city) {
     if (!forecastRes.ok) throw new Error('Forecast not found');
     const forecast = await forecastRes.json();
 
-    const uv = { value: Math.floor(Math.random() * 10) + 1 };
+    const uv = { value: Math.floor(Math.random() * 10) + 1 }; // Simulated UV index
     return { current, forecast, uv };
   } catch (error) {
     showError(error.message);
@@ -57,6 +58,7 @@ async function getWeatherData(city) {
   }
 }
 
+// Draws the temperature trend chart
 function renderChart(labels, temps) {
   const ctx = document.getElementById('tempChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
@@ -95,6 +97,7 @@ function convertTemp(temp) {
   return isCelsius ? `${Math.round(temp)}°C` : `${Math.round(temp * 9 / 5 + 32)}°F`;
 }
 
+// Main render function for both current weather and 4-day forecast
 function renderWeatherData(data) {
   if (!data) return;
 
@@ -114,6 +117,7 @@ function renderWeatherData(data) {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
+  // ✅ Extract a single forecast per day
   const dailyForecasts = {};
   forecast.list.forEach(item => {
     const dateObj = new Date(item.dt * 1000);
@@ -132,12 +136,15 @@ function renderWeatherData(data) {
   const sortedDates = Object.keys(dailyForecasts).sort();
   let count = 0;
   const labels = [], temps = [];
+
+  // Clear and re-render vertical forecast cards
   forecastContainer.innerHTML = '';
 
   for (const date of sortedDates) {
     if (date === todayKey) continue;
     const f = dailyForecasts[date];
     if (count < 4) {
+      // ✅ Vertical forecast card HTML output
       forecastContainer.innerHTML += `
         <div class="forecast-card">
           <i class="fas ${getWeatherIcon(f.icon)} forecast-icon"></i>
@@ -156,6 +163,7 @@ function renderWeatherData(data) {
   renderChart(labels, temps);
 }
 
+// Event listeners
 searchButton.addEventListener('click', async () => {
   const city = cityInput.value.trim();
   if (!city) return showError('Please enter a city name.');
@@ -177,6 +185,7 @@ themeToggle.addEventListener('change', () => {
   document.body.classList.toggle('light-mode', themeToggle.checked);
 });
 
+// Load default city on page load
 window.onload = async () => {
   const defaultCity = 'London';
   const data = await getWeatherData(defaultCity);
