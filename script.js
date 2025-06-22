@@ -233,10 +233,10 @@ function renderWeatherData(data) {
     }
   });
 
-  // Filter out today and get next 4 days
+  // Filter out today and get next 7 days
   const todayKey = today.toISOString().split('T')[0];
   const sortedDates = Object.keys(dailyForecasts).sort();
-  const futureDates = sortedDates.filter(date => date !== todayKey).slice(0, 4);
+  const futureDates = sortedDates.filter(date => date !== todayKey).slice(0, 5);
 
   // Clear and render forecast cards
   forecastContainer.innerHTML = '';
