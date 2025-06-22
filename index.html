@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mausam360 - Weather App</title>
+  <title>Beautiful Weather App</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-  <video autoplay muted loop id="background-video">
-    <source src="assets/Background 1.mp4" type="video/mp4">
-  </video>
+  <!-- Background -->
+  <div class="background-overlay"></div>
 
   <div class="weather-card">
+    <!-- Left Column -->
     <div class="left-column">
+      <!-- Header with Search -->
       <div class="header-search">
         <button class="menu-button"><i class="fas fa-bars"></i></button>
         <div class="search-input-container">
@@ -26,8 +26,9 @@
         <button id="search-button" class="search-button"><i class="fas fa-search"></i></button>
       </div>
 
+      <!-- Date and Toggles -->
       <div class="toggles-row">
-        <p id="current-date" class="date-text">Date here</p>
+        <p id="current-date" class="date-text">Loading...</p>
         <div class="toggles">
           <div class="toggle-item">
             <label class="switch">
@@ -46,6 +47,7 @@
         </div>
       </div>
 
+      <!-- Current Weather Display -->
       <div class="current-weather-display">
         <h2 id="location-name">London</h2>
         <p id="weather-description">Sunny</p>
@@ -55,25 +57,44 @@
         </div>
       </div>
 
+      <!-- Weather Details Grid -->
       <div class="weather-details-grid">
-        <div class="detail-item"><i class="fas fa-wind"></i><span id="wind-speed">15 km/h</span></div>
-        <div class="detail-item"><i class="fas fa-tint"></i><span id="humidity">65%</span></div>
-        <div class="detail-item"><i class="fas fa-sun"></i><span id="uv-index">Low UV</span></div>
-        <div class="detail-item"><i class="fas fa-smog"></i><span id="pollution">Low Pollution</span></div>
-        <div class="detail-item"><i class="fas fa-tree"></i><span id="pollen">Low Pollen</span></div>
+        <div class="detail-item">
+          <i class="fas fa-wind"></i>
+          <span id="wind-speed">15 km/h</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-tint"></i>
+          <span id="humidity">65%</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-sun"></i>
+          <span id="uv-index">UV Low</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-smog"></i>
+          <span id="pollution">Low Pollution</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-tree"></i>
+          <span id="pollen">Low Pollen</span>
+        </div>
       </div>
 
+      <!-- Daily Forecast -->
       <div class="daily-forecast-section">
         <h3 class="daily-forecast-title">Daily Forecast</h3>
-
-        <div id="forecast-container" class="forecast-container-vertical"></div>
+        <div id="forecast-container" class="forecast-container"></div>
       </div>
     </div>
 
+    <!-- Right Column - Chart -->
     <div class="right-column">
       <div class="chart-section">
-        <h3 class="daily-forecast-title">Temperature Trends</h3>
-        <canvas id="tempChart"></canvas>
+        <h3 class="chart-title">Temperature Trends</h3>
+        <div class="chart-container">
+          <canvas id="tempChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
