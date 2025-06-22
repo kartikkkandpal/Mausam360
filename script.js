@@ -289,14 +289,14 @@ cityInput.addEventListener('keypress', (e) => {
 unitToggle.addEventListener('change', async () => {
   isCelsius = !unitToggle.checked;
   const city = locationName.textContent;
-  if (city && city !== 'London') {
+  if (city && city !== 'Delhi') { // Changed 'London' to 'Delhi'
     const data = await getWeatherData(city);
     if (data) {
       renderWeatherData(data);
     }
   } else {
     // Re-render with default data
-    const data = await getWeatherData('London');
+    const data = await getWeatherData('Delhi'); // Changed 'London' to 'Delhi'
     if (data) {
       renderWeatherData(data);
     }
@@ -331,7 +331,7 @@ window.addEventListener('load', async () => {
   });
 
   // Load default city
-  const data = await getWeatherData('London');
+  const data = await getWeatherData('Delhi'); // Changed 'London' to 'Delhi'
   if (data) {
     renderWeatherData(data);
   }
