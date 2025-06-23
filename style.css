@@ -128,6 +128,11 @@ body {
   left: 0;
 }
 
+#locate-button i {
+  transform: rotate(45deg);
+  color: #00ccff;
+}
+
 /* Toggles Row */
 .toggles-row {
   display: flex;
