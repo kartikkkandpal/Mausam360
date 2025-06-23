@@ -1,12 +1,8 @@
-// -----------------------------
 // API Configuration
-// -----------------------------
 const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-// -----------------------------
 // DOM Elements
-// -----------------------------
 const cityInput = document.getElementById('city-input');
 const searchButton = document.getElementById('search-button');
 const locateButton = document.getElementById('locate-button');
@@ -17,23 +13,19 @@ const currentTemp = document.getElementById('current-temp');
 const windSpeed = document.getElementById('wind-speed');
 const humidity = document.getElementById('humidity');
 const uvIndex = document.getElementById('uv-index');
-const pollution = document.getElementById('pollution'); // Declared but not used
-const pollen = document.getElementById('pollen');       // Declared but not used
+const pollution = document.getElementById('pollution');
+const pollen = document.getElementById('pollen');      
 const forecastContainer = document.getElementById('forecast-container');
 const errorMsg = document.getElementById('error-msg');
 const unitToggle = document.getElementById('unit-toggle');
 const themeToggle = document.getElementById('theme-toggle');
 const currentDate = document.getElementById('current-date');
 
-// -----------------------------
 // State Variables
-// -----------------------------
 let isCelsius = true;
 let chartInstance = null;
 
-// -----------------------------
 // Icon Mapping (OpenWeather to Font Awesome)
-// -----------------------------
 function getWeatherIcon(iconCode) {
   const iconMap = {
     '01d': 'fa-sun',               '01n': 'fa-moon',
@@ -49,9 +41,7 @@ function getWeatherIcon(iconCode) {
   return iconMap[iconCode] || 'fa-question-circle';
 }
 
-// -----------------------------
 // Error Display Utility
-// -----------------------------
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.style.display = 'block';
@@ -60,9 +50,7 @@ function showError(message) {
   }, 5000);
 }
 
-// -----------------------------
 // Fetch Weather Data by City Name
-// -----------------------------
 async function getWeatherData(city) {
   errorMsg.style.display = 'none';
 
@@ -78,7 +66,7 @@ async function getWeatherData(city) {
     return {
       current,
       forecast,
-      uv: { value: Math.floor(Math.random() * 10) + 1 } // Mock UV data
+      uv: { value: Math.floor(Math.random() * 10) + 1 } 
     };
   } catch (error) {
     showError(error.message);
@@ -86,9 +74,7 @@ async function getWeatherData(city) {
   }
 }
 
-// -----------------------------
 // Fetch Weather by Geolocation
-// -----------------------------
 async function getWeatherByCoords(lat, lon) {
   try {
     const weatherRes = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
@@ -111,18 +97,14 @@ async function getWeatherByCoords(lat, lon) {
   }
 }
 
-// -----------------------------
 // Utility: Convert Temperature to °C or °F
-// -----------------------------
 function convertTemp(temp) {
   return isCelsius
     ? `${Math.round(temp)}°C`
     : `${Math.round(temp * 9 / 5 + 32)}°F`;
 }
 
-// -----------------------------
 // Utility: Map UV Value to Risk Level
-// -----------------------------
 function getUVLevel(uv) {
   if (uv <= 2) return 'Low';
   if (uv <= 5) return 'Moderate';
@@ -131,9 +113,7 @@ function getUVLevel(uv) {
   return 'Extreme';
 }
 
-// -----------------------------
 // Render Line Chart for Forecast Temperatures
-// -----------------------------
 function renderChart(labels, temps) {
   const ctx = document.getElementById('tempChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
@@ -200,9 +180,7 @@ function renderChart(labels, temps) {
   });
 }
 
-// -----------------------------
 // Render Current and Forecast Weather
-// -----------------------------
 function renderWeatherData(data) {
   if (!data) return;
 
@@ -270,9 +248,7 @@ function renderWeatherData(data) {
   renderChart(labels, temps);
 }
 
-// =============================
 // Event Listeners
-// =============================
 
 // 1. Search Weather by City
 searchButton.addEventListener('click', async () => {
