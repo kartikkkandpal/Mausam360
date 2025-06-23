@@ -1,3 +1,6 @@
+/* ==================================================
+   🌐 GLOBAL RESET & BASE BODY STYLES
+================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,6 +19,9 @@ body {
   position: relative;
 }
 
+/* ==================================================
+   🌈 BACKGROUND OVERLAY LAYER
+================================================== */
 .background-overlay {
   position: fixed;
   top: 0;
@@ -30,6 +36,9 @@ body {
   z-index: -1;
 }
 
+/* ==================================================
+   📦 MAIN WEATHER CARD CONTAINER
+================================================== */
 .weather-card {
   display: flex;
   flex-direction: row;
@@ -49,6 +58,7 @@ body {
   overflow: hidden;
 }
 
+/* Left and right columns of weather card */
 .left-column {
   flex: 1.2;
   display: flex;
@@ -66,7 +76,9 @@ body {
   min-height: 0;
 }
 
-/* Header Search */
+/* ==================================================
+   🔍 SEARCH BAR SECTION
+================================================== */
 .header-search {
   display: flex;
   align-items: center;
@@ -133,7 +145,9 @@ body {
   color: #00ccff;
 }
 
-/* Toggles Row */
+/* ==================================================
+   ⚙️ TOGGLES ROW
+================================================== */
 .toggles-row {
   display: flex;
   justify-content: space-between;
@@ -158,6 +172,7 @@ body {
   gap: 6px;
 }
 
+/* Toggle switch styles */
 .switch {
   position: relative;
   display: inline-block;
@@ -210,7 +225,9 @@ input:checked + .slider:before {
   font-weight: 500;
 }
 
-/* Current Weather Display */
+/* ==================================================
+   🌡️ CURRENT WEATHER DISPLAY
+================================================== */
 .current-weather-display {
   text-align: center;
   padding: 8px 0;
@@ -248,7 +265,9 @@ input:checked + .slider:before {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Weather Details Grid */
+/* ==================================================
+   🧮 WEATHER DETAILS GRID
+================================================== */
 .weather-details-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -286,7 +305,9 @@ input:checked + .slider:before {
   text-align: center;
 }
 
-/* Daily Forecast */
+/* ==================================================
+   📆 DAILY FORECAST SECTION
+================================================== */
 .daily-forecast-section {
   flex-grow: 1;
   min-height: 0;
@@ -363,7 +384,9 @@ input:checked + .slider:before {
   font-weight: 600;
 }
 
-/* Chart Section */
+/* ==================================================
+   📊 CHART SECTION
+================================================== */
 .chart-section {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
@@ -393,7 +416,9 @@ input:checked + .slider:before {
   height: 100% !important;
 }
 
-/* Light Mode with Whitish Inner Theme */
+/* ==================================================
+   🌞 LIGHT MODE
+================================================== */
 body.light-mode {
   background: #eaf2fb;
   color: #000;
@@ -444,22 +469,29 @@ body.light-mode .search-button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive Design */
+/* ==================================================
+   📱 RESPONSIVE MEDIA QUERIES
+================================================== */
+
+/* Tablet & smaller */
+@media (max-width: 1024px) {
+  .weather-card {
+    height: auto;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 768px) {
   .weather-card {
-    flex-direction: column;
     width: 95vw;
-    height: 90vh;
+    height: auto;
+    flex-direction: column;
     padding: 12px;
     gap: 12px;
   }
 
   .weather-details-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .toggles {
-    gap: 8px;
   }
 
   .current-temp {
@@ -469,32 +501,56 @@ body.light-mode .search-button:hover {
   .icon-large {
     font-size: 32px;
   }
-
-  .forecast-container {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 480px) {
   .weather-card {
     width: 98vw;
-    height: 95vh;
+    height: auto;
     padding: 8px;
   }
 
   .toggles-row {
     flex-direction: column;
-    gap: 8px;
     align-items: flex-start;
+    gap: 8px;
   }
 
-  .weather-details-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .search-input {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .forecast-card {
+    min-width: 60px;
+    padding: 6px;
+  }
+
+  .chart-title {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .forecast-container {
     gap: 6px;
   }
 
   .detail-item {
-    padding: 6px;
+    font-size: 9px;
+    gap: 2px;
+  }
+
+  .current-temp {
+    font-size: 20px;
+  }
+
+  .icon-large {
+    font-size: 24px;
+  }
+
+  .day-of-week,
+  .forecast-temp {
+    font-size: 9px;
   }
 }
