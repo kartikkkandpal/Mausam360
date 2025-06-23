@@ -330,7 +330,7 @@ input:checked + .slider:before {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  flex-grow: 1; /* Added to fill the space */
+  flex-grow: 1;
 }
 
 .forecast-card:hover {
@@ -388,40 +388,41 @@ input:checked + .slider:before {
   height: 100% !important;
 }
 
-/* Light Mode */
+/* Light Mode with Whitish Inner Theme */
 body.light-mode {
-  background: #f0f2f5;
-  color: #333;
+  background: #eaf2fb;
+  color: #000;
 }
 
 body.light-mode .background-overlay {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  opacity: 0.8;
+  background: linear-gradient(135deg, #d0e4f7, #b2d4f0, #9fc9ec);
+  opacity: 0.9;
 }
 
 body.light-mode .weather-card {
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  box-shadow: 
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 body.light-mode .search-input {
   background: rgba(0, 0, 0, 0.05);
-  color: #333;
+  color: #222;
   border-color: rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .search-input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 body.light-mode .detail-item,
 body.light-mode .forecast-card,
 body.light-mode .chart-section {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.05);
 }
 
 body.light-mode .slider {
@@ -430,7 +431,7 @@ body.light-mode .slider {
 
 body.light-mode .menu-button,
 body.light-mode .search-button {
-  color: #333;
+  color: #000;
 }
 
 body.light-mode .menu-button:hover,
@@ -447,23 +448,23 @@ body.light-mode .search-button:hover {
     padding: 12px;
     gap: 12px;
   }
-  
+
   .weather-details-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .toggles {
     gap: 8px;
   }
-  
+
   .current-temp {
     font-size: 28px;
   }
-  
+
   .icon-large {
     font-size: 32px;
   }
-  
+
   .forecast-container {
     flex-wrap: wrap;
     justify-content: center;
@@ -476,18 +477,18 @@ body.light-mode .search-button:hover {
     height: 95vh;
     padding: 8px;
   }
-  
+
   .toggles-row {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
   }
-  
+
   .weather-details-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
   }
-  
+
   .detail-item {
     padding: 6px;
   }
