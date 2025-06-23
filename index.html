@@ -1,32 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Page Setup -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mausam360</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+  <!-- External Stylesheet -->
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Chart.js for Temperature Trends -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  
+  <!-- Background Gradient Overlay -->
   <div class="background-overlay"></div>
 
+  <!-- Main Weather Card Container -->
   <div class="weather-card">
+
+    <!-- Left Column: Search, Weather, Forecast -->
     <div class="left-column">
+
+      <!-- Search Bar and Control Buttons -->
       <div class="header-search">
-        <button class="menu-button"><i class="fas fa-bars"></i></button>
+        <!-- Menu Icon -->
+        <button class="menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Input Field -->
         <div class="search-input-container">
-          <input type="text" id="city-input" placeholder="Enter city name" class="search-input"/>
+          <input 
+            type="text" 
+            id="city-input" 
+            placeholder="Enter city name" 
+            class="search-input"
+          />
           <div id="error-msg" class="error-msg"></div>
         </div>
-        <button id="search-button" class="search-button"><i class="fas fa-search"></i></button>
-        <button id="locate-button" class="search-button" title="Locate Me"><i class="fas fa-location-arrow"></i></button>
+
+        <!-- Search & Locate Buttons -->
+        <button id="search-button" class="search-button" title="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button id="locate-button" class="search-button" title="Locate Me">
+          <i class="fas fa-location-arrow"></i>
+        </button>
       </div>
 
+      <!-- Date & Toggle Controls -->
       <div class="toggles-row">
+        <!-- Date Display -->
         <p id="current-date" class="date-text">Loading...</p>
+
+        <!-- Unit and Theme Toggles -->
         <div class="toggles">
+          <!-- °C/°F Toggle -->
           <div class="toggle-item">
             <label class="switch">
               <input type="checkbox" id="unit-toggle">
@@ -34,6 +71,8 @@
             </label>
             <span class="toggle-label">°C / °F</span>
           </div>
+
+          <!-- Dark/Light Theme Toggle -->
           <div class="toggle-item">
             <label class="switch">
               <input type="checkbox" id="theme-toggle">
@@ -44,6 +83,7 @@
         </div>
       </div>
 
+      <!-- Current Weather Display Section -->
       <div class="current-weather-display">
         <h2 id="location-name">Delhi</h2>
         <p id="weather-description">Sunny</p>
@@ -53,20 +93,40 @@
         </div>
       </div>
 
+      <!-- Additional Weather Details (Wind, Humidity, etc.) -->
       <div class="weather-details-grid">
-        <div class="detail-item"><i class="fas fa-wind"></i><span id="wind-speed">15 km/h</span></div>
-        <div class="detail-item"><i class="fas fa-tint"></i><span id="humidity">65%</span></div>
-        <div class="detail-item"><i class="fas fa-sun"></i><span id="uv-index">UV Low</span></div>
-        <div class="detail-item"><i class="fas fa-smog"></i><span id="pollution">Low Pollution</span></div>
-        <div class="detail-item"><i class="fas fa-tree"></i><span id="pollen">Low Pollen</span></div>
+        <div class="detail-item">
+          <i class="fas fa-wind"></i>
+          <span id="wind-speed">15 km/h</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-tint"></i>
+          <span id="humidity">65%</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-sun"></i>
+          <span id="uv-index">UV Low</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-smog"></i>
+          <span id="pollution">Low Pollution</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-tree"></i>
+          <span id="pollen">Low Pollen</span>
+        </div>
       </div>
 
+      <!-- Daily Weather Forecast Section -->
       <div class="daily-forecast-section">
         <h3 class="daily-forecast-title">Daily Forecast</h3>
-        <div id="forecast-container" class="forecast-container"></div>
+        <div id="forecast-container" class="forecast-container">
+          <!-- Cards will be generated dynamically using JS -->
+        </div>
       </div>
     </div>
 
+    <!-- Right Column: Chart Section -->
     <div class="right-column">
       <div class="chart-section">
         <h3 class="chart-title">Temperature Trends</h3>
@@ -75,8 +135,10 @@
         </div>
       </div>
     </div>
+
   </div>
 
+  <!-- JavaScript Logic -->
   <script src="script.js"></script>
 </body>
 </html>
