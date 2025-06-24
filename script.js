@@ -1,8 +1,7 @@
-// API Configuration
-const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a'; // OpenWeatherMap API key
+const BASE_URL = 'https://api.openweathermap.org/data/2.5'; // Base API URL
 
-// DOM Elements
+// Grabbing essential DOM elements
 const cityInput = document.getElementById('city-input');
 const searchButton = document.getElementById('search-button');
 const locateButton = document.getElementById('locate-button');
@@ -14,34 +13,34 @@ const windSpeed = document.getElementById('wind-speed');
 const humidity = document.getElementById('humidity');
 const uvIndex = document.getElementById('uv-index');
 const pollution = document.getElementById('pollution');
-const pollen = document.getElementById('pollen');      
+const pollen = document.getElementById('pollen');
 const forecastContainer = document.getElementById('forecast-container');
 const errorMsg = document.getElementById('error-msg');
 const unitToggle = document.getElementById('unit-toggle');
 const themeToggle = document.getElementById('theme-toggle');
 const currentDate = document.getElementById('current-date');
 
-// State Variables
+// App state variables
 let isCelsius = true;
 let chartInstance = null;
 
-// Icon Mapping (OpenWeather to Font Awesome)
+// Maps OpenWeather icon codes to Font Awesome classes
 function getWeatherIcon(iconCode) {
   const iconMap = {
-    '01d': 'fa-sun',               '01n': 'fa-moon',
-    '02d': 'fa-cloud-sun',         '02n': 'fa-cloud-moon',
-    '03d': 'fa-cloud',             '03n': 'fa-cloud',
-    '04d': 'fa-cloud',             '04n': 'fa-cloud',
-    '09d': 'fa-cloud-showers-heavy','09n': 'fa-cloud-showers-heavy',
-    '10d': 'fa-cloud-rain',        '10n': 'fa-cloud-rain',
-    '11d': 'fa-bolt',              '11n': 'fa-bolt',
-    '13d': 'fa-snowflake',         '13n': 'fa-snowflake',
-    '50d': 'fa-smog',              '50n': 'fa-smog'
+    '01d': 'fa-sun', '01n': 'fa-moon',
+    '02d': 'fa-cloud-sun', '02n': 'fa-cloud-moon',
+    '03d': 'fa-cloud', '03n': 'fa-cloud',
+    '04d': 'fa-cloud', '04n': 'fa-cloud',
+    '09d': 'fa-cloud-showers-heavy', '09n': 'fa-cloud-showers-heavy',
+    '10d': 'fa-cloud-rain', '10n': 'fa-cloud-rain',
+    '11d': 'fa-bolt', '11n': 'fa-bolt',
+    '13d': 'fa-snowflake', '13n': 'fa-snowflake',
+    '50d': 'fa-smog', '50n': 'fa-smog'
   };
   return iconMap[iconCode] || 'fa-question-circle';
 }
 
-// Error Display Utility
+// Shows error message for a few seconds
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.style.display = 'block';
@@ -50,7 +49,7 @@ function showError(message) {
   }, 5000);
 }
 
-// Fetch Weather Data by City Name
+// Fetches weather and forecast data using city name
 async function getWeatherData(city) {
   errorMsg.style.display = 'none';
 
@@ -63,48 +62,37 @@ async function getWeatherData(city) {
     if (!forecastRes.ok) throw new Error('Forecast data not available');
     const forecast = await forecastRes.json();
 
-    return {
-      current,
-      forecast,
-      uv: { value: Math.floor(Math.random() * 10) + 1 } 
-    };
+    return { current, forecast, uv: { value: Math.floor(Math.random() * 10) + 1 } };
   } catch (error) {
     showError(error.message);
     return null;
   }
 }
 
-// Fetch Weather by Geolocation
+// Fetches weather using user’s geolocation
 async function getWeatherByCoords(lat, lon) {
   try {
     const weatherRes = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
     const forecastRes = await fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
 
-    if (!weatherRes.ok || !forecastRes.ok)
-      throw new Error('Unable to retrieve weather for current location.');
+    if (!weatherRes.ok || !forecastRes.ok) throw new Error('Unable to retrieve weather for current location.');
 
     const current = await weatherRes.json();
     const forecast = await forecastRes.json();
 
-    return {
-      current,
-      forecast,
-      uv: { value: Math.floor(Math.random() * 10) + 1 }
-    };
+    return { current, forecast, uv: { value: Math.floor(Math.random() * 10) + 1 } };
   } catch (error) {
     showError(error.message);
     return null;
   }
 }
 
-// Utility: Convert Temperature to °C or °F
+// Converts temperature value to current unit (C/F)
 function convertTemp(temp) {
-  return isCelsius
-    ? `${Math.round(temp)}°C`
-    : `${Math.round(temp * 9 / 5 + 32)}°F`;
+  return isCelsius ? `${Math.round(temp)}°C` : `${Math.round(temp * 9 / 5 + 32)}°F`;
 }
 
-// Utility: Map UV Value to Risk Level
+// Maps UV index value to descriptive level
 function getUVLevel(uv) {
   if (uv <= 2) return 'Low';
   if (uv <= 5) return 'Moderate';
@@ -113,7 +101,7 @@ function getUVLevel(uv) {
   return 'Extreme';
 }
 
-// Render Line Chart for Forecast Temperatures
+// Renders the temperature chart using Chart.js
 function renderChart(labels, temps) {
   const ctx = document.getElementById('tempChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
@@ -180,13 +168,12 @@ function renderChart(labels, temps) {
   });
 }
 
-// Render Current and Forecast Weather
+// Displays weather info on UI
 function renderWeatherData(data) {
   if (!data) return;
 
   const { current, forecast, uv } = data;
 
-  // Current Weather Display
   locationName.textContent = current.name;
   weatherDescription.textContent = current.weather[0].description;
   mainWeatherIcon.className = `fas ${getWeatherIcon(current.weather[0].icon)} icon-large`;
@@ -197,13 +184,9 @@ function renderWeatherData(data) {
 
   const today = new Date();
   currentDate.textContent = today.toLocaleDateString('en-GB', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  // Build Daily Forecasts (next 4–5 days)
   const dailyForecasts = {};
   forecast.list.forEach(item => {
     const dateObj = new Date(item.dt * 1000);
@@ -218,14 +201,12 @@ function renderWeatherData(data) {
     }
   });
 
-  // Filter out today and limit to 5 entries
   const todayKey = today.toISOString().split('T')[0];
   const futureDates = Object.keys(dailyForecasts)
     .filter(date => date !== todayKey)
     .sort()
     .slice(0, 5);
 
-  // Render forecast cards
   forecastContainer.innerHTML = '';
   const labels = [], temps = [];
 
@@ -244,13 +225,10 @@ function renderWeatherData(data) {
     temps.push(isCelsius ? f.temp : f.temp * 9 / 5 + 32);
   });
 
-  // Render Chart
   renderChart(labels, temps);
 }
 
-// Event Listeners
-
-// 1. Search Weather by City
+// Trigger weather fetch on search button click
 searchButton.addEventListener('click', async () => {
   const city = cityInput.value.trim();
   if (!city) return showError('Please enter a city name');
@@ -258,12 +236,12 @@ searchButton.addEventListener('click', async () => {
   if (data) renderWeatherData(data);
 });
 
-// 2. Trigger Search on Enter Key
+// Trigger search when Enter key is pressed
 cityInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') searchButton.click();
 });
 
-// 3. Toggle °C / °F
+// Toggle unit and refresh data
 unitToggle.addEventListener('change', async () => {
   isCelsius = !unitToggle.checked;
   const city = locationName.textContent || 'Delhi';
@@ -271,7 +249,7 @@ unitToggle.addEventListener('change', async () => {
   if (data) renderWeatherData(data);
 });
 
-// 4. Toggle Light/Dark Theme and Refresh Chart
+// Toggle light/dark mode and refresh chart
 themeToggle.addEventListener('change', () => {
   document.body.classList.toggle('light-mode', themeToggle.checked);
   if (chartInstance) {
@@ -284,7 +262,7 @@ themeToggle.addEventListener('change', () => {
   }
 });
 
-// 5. Fetch Weather Using Geolocation
+// Get weather using device geolocation
 locateButton.addEventListener('click', () => {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(async pos => {
@@ -297,14 +275,11 @@ locateButton.addEventListener('click', () => {
   }
 });
 
-// 6. On Page Load – Use Geolocation or Fallback to Delhi
+// On page load: try geolocation or fallback to Delhi
 window.addEventListener('load', () => {
   const today = new Date();
   currentDate.textContent = today.toLocaleDateString('en-GB', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
   if ('geolocation' in navigator) {
@@ -322,7 +297,7 @@ window.addEventListener('load', () => {
   }
 });
 
-// 7. Add Interactive Hover Animations (CSS Injected)
+// Adds hover animation styles dynamically after DOM loads
 document.addEventListener('DOMContentLoaded', () => {
   const style = document.createElement('style');
   style.textContent = `
