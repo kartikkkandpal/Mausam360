@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Page Setup -->
+  <!-- Meta Tags -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mausam360</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-  <!-- External Stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
+  <!-- External CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- Chart.js for Temperature Trends -->
+  <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  
-  <!-- Background Gradient Overlay -->
+
+  <!-- Background Overlay for gradient effect -->
   <div class="background-overlay"></div>
 
-  <!-- Main Weather Card Container -->
+  <!-- Main Weather Card Layout -->
   <div class="weather-card">
 
-    <!-- Left Column: Search, Weather, Forecast -->
+    <!-- Left Column: Inputs, Info, Forecast -->
     <div class="left-column">
 
-      <!-- Search Bar and Control Buttons -->
+      <!-- Top Header: Search and Menu -->
       <div class="header-search">
-        <!-- Menu Icon -->
+
+        <!-- Sidebar/Menu Button -->
         <button class="menu-button">
           <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Search Input Field -->
+        <!-- Search Field -->
         <div class="search-input-container">
           <input 
             type="text" 
             id="city-input" 
-            placeholder="Enter city name" 
             class="search-input"
+            placeholder="Enter city name"
           />
           <div id="error-msg" class="error-msg"></div>
         </div>
 
-        <!-- Search & Locate Buttons -->
+        <!-- Search and Geolocation Buttons -->
         <button id="search-button" class="search-button" title="Search">
           <i class="fas fa-search"></i>
         </button>
@@ -56,26 +57,28 @@
         </button>
       </div>
 
-      <!-- Date & Toggle Controls -->
+      <!-- Date and Toggles Section -->
       <div class="toggles-row">
-        <!-- Date Display -->
+
+        <!-- Display Current Date -->
         <p id="current-date" class="date-text">Loading...</p>
 
-        <!-- Unit and Theme Toggles -->
+        <!-- Unit & Theme Toggles -->
         <div class="toggles">
-          <!-- °C/°F Toggle -->
+
+          <!-- Celsius/Fahrenheit Toggle -->
           <div class="toggle-item">
             <label class="switch">
-              <input type="checkbox" id="unit-toggle">
+              <input type="checkbox" id="unit-toggle" />
               <span class="slider round"></span>
             </label>
             <span class="toggle-label">°C / °F</span>
           </div>
 
-          <!-- Dark/Light Theme Toggle -->
+          <!-- Dark/Light Mode Toggle -->
           <div class="toggle-item">
             <label class="switch">
-              <input type="checkbox" id="theme-toggle">
+              <input type="checkbox" id="theme-toggle" />
               <span class="slider round"></span>
             </label>
             <span class="toggle-label">Dark / Light</span>
@@ -83,7 +86,7 @@
         </div>
       </div>
 
-      <!-- Current Weather Display Section -->
+      <!-- Current Weather Info -->
       <div class="current-weather-display">
         <h2 id="location-name">Delhi</h2>
         <p id="weather-description">Sunny</p>
@@ -93,7 +96,7 @@
         </div>
       </div>
 
-      <!-- Additional Weather Details (Wind, Humidity, etc.) -->
+      <!-- Extra Weather Metrics -->
       <div class="weather-details-grid">
         <div class="detail-item">
           <i class="fas fa-wind"></i>
@@ -117,16 +120,16 @@
         </div>
       </div>
 
-      <!-- Daily Weather Forecast Section -->
+      <!-- Daily Weather Forecast Cards -->
       <div class="daily-forecast-section">
         <h3 class="daily-forecast-title">Daily Forecast</h3>
         <div id="forecast-container" class="forecast-container">
-          <!-- Cards will be generated dynamically using JS -->
+          <!-- Forecast cards will be populated by JS -->
         </div>
       </div>
     </div>
 
-    <!-- Right Column: Chart Section -->
+    <!-- Right Column: Temperature Chart -->
     <div class="right-column">
       <div class="chart-section">
         <h3 class="chart-title">Temperature Trends</h3>
@@ -138,7 +141,7 @@
 
   </div>
 
-  <!-- JavaScript Logic -->
+  <!-- Main JS Logic -->
   <script src="script.js"></script>
 </body>
 </html>
