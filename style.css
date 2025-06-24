@@ -17,6 +17,8 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ==================================================
@@ -56,9 +58,10 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Left and right columns of weather card */
 .left-column {
   flex: 1.2;
   display: flex;
@@ -172,7 +175,6 @@ body {
   gap: 6px;
 }
 
-/* Toggle switch styles */
 .switch {
   position: relative;
   display: inline-block;
@@ -469,65 +471,70 @@ body.light-mode .search-button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* ==================================================
-   📱 RESPONSIVE MEDIA QUERIES
-================================================== */
 
-/* Tablet & smaller */
-@media (max-width: 1024px) {
-  .weather-card {
-    height: auto;
-    flex-direction: column;
-  }
-}
-
+/* ===== ✅ MOBILE RESPONSIVE FIXES ===== */
 @media (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
   .weather-card {
-    width: 95vw;
-    height: auto;
     flex-direction: column;
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 12px;
     gap: 12px;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    flex: unset;
+  }
+
+  .right-column {
+    order: 3;
+    margin-top: 16px;
+  }
+
+  .chart-section {
+    height: auto;
+    min-height: 180px;
   }
 
   .weather-details-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .current-temp {
-    font-size: 28px;
-  }
-
-  .icon-large {
-    font-size: 32px;
+  .daily-forecast-section {
+    order: 2;
   }
 }
 
 @media (max-width: 480px) {
   .weather-card {
-    width: 98vw;
-    height: auto;
-    padding: 8px;
+    padding: 10px;
+  }
+
+  .chart-section {
+    min-height: 160px;
+  }
+
+  .search-input {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .forecast-card {
+    min-width: 60px;
   }
 
   .toggles-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-  }
-
-  .search-input {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  .forecast-card {
-    min-width: 60px;
-    padding: 6px;
-  }
-
-  .chart-title {
-    font-size: 13px;
   }
 }
 
@@ -552,5 +559,9 @@ body.light-mode .search-button:hover {
   .day-of-week,
   .forecast-temp {
     font-size: 9px;
+  }
+
+  .chart-section {
+    min-height: 140px;
   }
 }
