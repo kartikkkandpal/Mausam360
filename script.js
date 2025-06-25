@@ -1,7 +1,7 @@
-const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a'; // OpenWeatherMap API key
-const BASE_URL = 'https://api.openweathermap.org/data/2.5'; // Base API URL
+const API_KEY = 'f7130f9dd3cbe29b2b5b46040cc37a3a';
+const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-// Grabbing essential DOM elements
+// DOM Elements
 const cityInput = document.getElementById('city-input');
 const searchButton = document.getElementById('search-button');
 const locateButton = document.getElementById('locate-button');
@@ -12,19 +12,18 @@ const currentTemp = document.getElementById('current-temp');
 const windSpeed = document.getElementById('wind-speed');
 const humidity = document.getElementById('humidity');
 const uvIndex = document.getElementById('uv-index');
-const pollution = document.getElementById('pollution');
-const pollen = document.getElementById('pollen');
 const forecastContainer = document.getElementById('forecast-container');
 const errorMsg = document.getElementById('error-msg');
 const unitToggle = document.getElementById('unit-toggle');
 const themeToggle = document.getElementById('theme-toggle');
 const currentDate = document.getElementById('current-date');
+const pollution = document.getElementById('pollution');
 
-// App state variables
+// App state
 let isCelsius = true;
 let chartInstance = null;
 
-// Maps OpenWeather icon codes to Font Awesome classes
+// Map OpenWeather icon codes to Font Awesome classes
 function getWeatherIcon(iconCode) {
   const iconMap = {
     '01d': 'fa-sun', '01n': 'fa-moon',
@@ -40,7 +39,7 @@ function getWeatherIcon(iconCode) {
   return iconMap[iconCode] || 'fa-question-circle';
 }
 
-// Shows error message for a few seconds
+// Show error message for a few seconds
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.style.display = 'block';
@@ -49,10 +48,9 @@ function showError(message) {
   }, 5000);
 }
 
-// Fetches weather and forecast data using city name
+// Fetch weather and forecast data by city name
 async function getWeatherData(city) {
   errorMsg.style.display = 'none';
-
   try {
     const weatherRes = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
     if (!weatherRes.ok) throw new Error('City not found');
@@ -62,6 +60,7 @@ async function getWeatherData(city) {
     if (!forecastRes.ok) throw new Error('Forecast data not available');
     const forecast = await forecastRes.json();
 
+    // UV index is mocked as OpenWeather free API does not provide it
     return { current, forecast, uv: { value: Math.floor(Math.random() * 10) + 1 } };
   } catch (error) {
     showError(error.message);
@@ -69,17 +68,14 @@ async function getWeatherData(city) {
   }
 }
 
-// Fetches weather using user’s geolocation
+// Fetch weather and forecast by coordinates
 async function getWeatherByCoords(lat, lon) {
   try {
     const weatherRes = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
     const forecastRes = await fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
-
     if (!weatherRes.ok || !forecastRes.ok) throw new Error('Unable to retrieve weather for current location.');
-
     const current = await weatherRes.json();
     const forecast = await forecastRes.json();
-
     return { current, forecast, uv: { value: Math.floor(Math.random() * 10) + 1 } };
   } catch (error) {
     showError(error.message);
@@ -87,12 +83,19 @@ async function getWeatherByCoords(lat, lon) {
   }
 }
 
-// Converts temperature value to current unit (C/F)
+// Fetch pollution data by coordinates
+async function getPollutionData(lat, lon) {
+  const res = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+  if (!res.ok) throw new Error('Pollution data not available');
+  return res.json();
+}
+
+// Convert temperature to current unit (C/F)
 function convertTemp(temp) {
   return isCelsius ? `${Math.round(temp)}°C` : `${Math.round(temp * 9 / 5 + 32)}°F`;
 }
 
-// Maps UV index value to descriptive level
+// Map UV index value to descriptive level
 function getUVLevel(uv) {
   if (uv <= 2) return 'Low';
   if (uv <= 5) return 'Moderate';
@@ -101,13 +104,12 @@ function getUVLevel(uv) {
   return 'Extreme';
 }
 
-// Renders the temperature chart using Chart.js
+// Render temperature chart using Chart.js
 function renderChart(labels, temps) {
   const ctx = document.getElementById('tempChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
 
   const isDarkMode = !document.body.classList.contains('light-mode');
-
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: {
@@ -168,10 +170,9 @@ function renderChart(labels, temps) {
   });
 }
 
-// Displays weather info on UI
+// Render weather info on UI
 function renderWeatherData(data) {
   if (!data) return;
-
   const { current, forecast, uv } = data;
 
   locationName.textContent = current.name;
@@ -182,11 +183,27 @@ function renderWeatherData(data) {
   humidity.textContent = `${current.main.humidity}%`;
   uvIndex.textContent = `UV ${getUVLevel(uv.value)}`;
 
+  // Fetch and display pollution data
+  getPollutionData(current.coord.lat, current.coord.lon)
+    .then(pollutionData => {
+      if (pollutionData && pollutionData.list && pollutionData.list.length > 0) {
+        const aqi = pollutionData.list[0].main.aqi;
+        const aqiLevels = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+        pollution.textContent = `AQI: ${aqi} (${aqiLevels[aqi - 1]})`;
+      } else {
+        pollution.textContent = "N/A";
+      }
+    })
+    .catch(() => {
+      pollution.textContent = "N/A";
+    });
+
   const today = new Date();
   currentDate.textContent = today.toLocaleDateString('en-GB', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
+  // Prepare daily forecast data
   const dailyForecasts = {};
   forecast.list.forEach(item => {
     const dateObj = new Date(item.dt * 1000);
@@ -209,7 +226,6 @@ function renderWeatherData(data) {
 
   forecastContainer.innerHTML = '';
   const labels = [], temps = [];
-
   futureDates.forEach(date => {
     const f = dailyForecasts[date];
     const card = document.createElement('div');
@@ -228,7 +244,7 @@ function renderWeatherData(data) {
   renderChart(labels, temps);
 }
 
-// Trigger weather fetch on search button click
+// Event: Search button click
 searchButton.addEventListener('click', async () => {
   const city = cityInput.value.trim();
   if (!city) return showError('Please enter a city name');
@@ -236,12 +252,12 @@ searchButton.addEventListener('click', async () => {
   if (data) renderWeatherData(data);
 });
 
-// Trigger search when Enter key is pressed
+// Event: Enter key in search input
 cityInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') searchButton.click();
 });
 
-// Toggle unit and refresh data
+// Event: Unit toggle
 unitToggle.addEventListener('change', async () => {
   isCelsius = !unitToggle.checked;
   const city = locationName.textContent || 'Delhi';
@@ -249,7 +265,7 @@ unitToggle.addEventListener('change', async () => {
   if (data) renderWeatherData(data);
 });
 
-// Toggle light/dark mode and refresh chart
+// Event: Theme toggle
 themeToggle.addEventListener('change', () => {
   document.body.classList.toggle('light-mode', themeToggle.checked);
   if (chartInstance) {
@@ -262,7 +278,7 @@ themeToggle.addEventListener('change', () => {
   }
 });
 
-// Get weather using device geolocation
+// Event: Locate button (geolocation)
 locateButton.addEventListener('click', () => {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(async pos => {
@@ -297,7 +313,7 @@ window.addEventListener('load', () => {
   }
 });
 
-// Adds hover animation styles dynamically after DOM loads
+// Add hover animation styles dynamically after DOM loads
 document.addEventListener('DOMContentLoaded', () => {
   const style = document.createElement('style');
   style.textContent = `
