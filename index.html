@@ -19,26 +19,22 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
   <!-- Background Overlay for gradient effect -->
   <div class="background-overlay"></div>
 
   <!-- Main Weather Card Layout -->
-  <div class="weather-card">
+  <main class="weather-card">
 
     <!-- Left Column: Inputs, Info, Forecast -->
     <div class="left-column">
 
       <!-- Top Header: Search and Menu -->
       <div class="header-search">
-
-        <!-- Sidebar/Menu Button -->
-        <button class="menu-button">
+        <button class="menu-button" aria-label="Open menu">
           <i class="fas fa-bars"></i>
         </button>
-
-        <!-- Search Field -->
         <div class="search-input-container">
+          <label for="city-input" style="position:absolute;left:-9999px;">City Name</label>
           <input 
             type="text" 
             id="city-input" 
@@ -47,26 +43,18 @@
           />
           <div id="error-msg" class="error-msg"></div>
         </div>
-
-        <!-- Search and Geolocation Buttons -->
-        <button id="search-button" class="search-button" title="Search">
+        <button id="search-button" class="search-button" title="Search" aria-label="Search">
           <i class="fas fa-search"></i>
         </button>
-        <button id="locate-button" class="search-button" title="Locate Me">
+        <button id="locate-button" class="search-button" title="Locate Me" aria-label="Locate Me">
           <i class="fas fa-location-arrow"></i>
         </button>
       </div>
 
       <!-- Date and Toggles Section -->
       <div class="toggles-row">
-
-        <!-- Display Current Date -->
         <p id="current-date" class="date-text">Loading...</p>
-
-        <!-- Unit & Theme Toggles -->
         <div class="toggles">
-
-          <!-- Celsius/Fahrenheit Toggle -->
           <div class="toggle-item">
             <label class="switch">
               <input type="checkbox" id="unit-toggle" />
@@ -74,8 +62,6 @@
             </label>
             <span class="toggle-label">°C / °F</span>
           </div>
-
-          <!-- Dark/Light Mode Toggle -->
           <div class="toggle-item">
             <label class="switch">
               <input type="checkbox" id="theme-toggle" />
@@ -112,11 +98,7 @@
         </div>
         <div class="detail-item">
           <i class="fas fa-smog"></i>
-          <span id="pollution">Low Pollution</span>
-        </div>
-        <div class="detail-item">
-          <i class="fas fa-tree"></i>
-          <span id="pollen">Low Pollen</span>
+          <span id="pollution">N/A</span>
         </div>
       </div>
 
@@ -139,7 +121,7 @@
       </div>
     </div>
 
-  </div>
+  </main>
 
   <!-- Main JS Logic -->
   <script src="script.js"></script>
