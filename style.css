@@ -455,6 +455,7 @@ body.light-mode .search-button:hover {
 @media (max-width: 768px) {
   body {
     overflow: auto; 
+    padding: 14px;
   }
 
   .weather-card {
@@ -494,6 +495,10 @@ body.light-mode .search-button:hover {
 }
 
 @media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
   .weather-card {
     padding: 10px; 
   }
@@ -520,6 +525,10 @@ body.light-mode .search-button:hover {
 }
 
 @media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
   .forecast-container {
     gap: 6px; 
   }
