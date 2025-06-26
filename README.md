@@ -40,7 +40,7 @@ To get this project running locally:
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/mausam360.git
+    git clone https://github.com/kartikkkandpal/mausam360.git
     cd mausam360
     ```
 
