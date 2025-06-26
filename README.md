@@ -74,9 +74,7 @@ Contributions and suggestions are welcome!
 
 ## Live Demo
 
-Try the app here: [Mausam360 Live](https://your-deployment-url.com)
-
-> *(Replace with actual deployment URL when live.)*
+Try the app here: [Mausam360 Live](https://mausam360-kartikk.vercel.app/)
 
 ## License
 
