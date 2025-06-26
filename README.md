@@ -25,7 +25,7 @@ Mausam360 is a feature-rich, visually engaging weather application built using H
 ## Screenshots
 | Darkmode | Lightmode | Responsive Mobile Layout |
 | :------------------: | :----------------------: | :----------------: |
-| ![Darkmode](screenshots/desktop-view.png) | ![Lightmode](screenshots/mobile-view.png) | ![Responsive Mobile Layout](screenshots/chart-view.png) |
+| ![Darkmode](Darkmode.png) | ![Lightmode](Lightmode.png) | ![Responsive Mobile Layout](Responsive Mobile Layout.png) |
 
 ## Tech Stack
 * **HTML5:** Structured semantic markup.
