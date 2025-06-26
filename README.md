@@ -23,9 +23,9 @@ Mausam360 is a feature-rich, visually engaging weather application built using H
 * **Animated UI:** Smooth transitions and hover effects for modern UX.
 
 ## Screenshots
-| Main View (Desktop) | Responsive Mobile Layout | Temperature Chart |
+| Darkmode | Lightmode | Responsive Mobile Layout |
 | :------------------: | :----------------------: | :----------------: |
-| ![Desktop View](screenshots/desktop-view.png) | ![Mobile View](screenshots/mobile-view.png) | ![Chart](screenshots/chart-view.png) |
+| ![Darkmode](screenshots/desktop-view.png) | ![Lightmode](screenshots/mobile-view.png) | ![Responsive Mobile Layout](screenshots/chart-view.png) |
 
 ## Tech Stack
 * **HTML5:** Structured semantic markup.
