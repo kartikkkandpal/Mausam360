@@ -189,32 +189,35 @@ const TemperatureChart = ({ data }) => {
           {/* Tooltip */}
           {hovered !== null && (
             <g>
+              {/* Tooltip box  */}
               <rect
-                x={points[hovered].x - 38}
-                y={points[hovered].y - 44}
-                rx={8}
-                width={76}
-                height={32}
+                x={points[hovered].x - 45}
+                y={points[hovered].y - 56}
+                rx={12}
+                width={90}
+                height={52}
                 fill="#23263a"
                 opacity={0.95}
                 stroke="#00bfff"
                 strokeWidth={1}
               />
+              {/* Date */}
               <text
                 x={points[hovered].x}
-                y={points[hovered].y - 24}
+                y={points[hovered].y - 36}
                 textAnchor="middle"
-                fontSize={15}
+                fontSize={16}
                 fill="#fff"
                 style={{ fontWeight: 600 }}
               >
                 {formatDate(points[hovered].date)}
               </text>
+              {/* Temperature */}
               <text
                 x={points[hovered].x}
-                y={points[hovered].y - 8}
+                y={points[hovered].y - 14}
                 textAnchor="middle"
-                fontSize={15}
+                fontSize={16}
                 fill="#00bfff"
                 style={{ fontWeight: 600 }}
               >
