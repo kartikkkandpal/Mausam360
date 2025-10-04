@@ -1,6 +1,6 @@
 # 🌦️ Mausam360 - Weather Dashboard Web App
 
-A sleek, interactive weather dashboard providing real-time weather updates, temperature trends, and daily forecasts. Enjoy a modern UI, responsive charts, and theme switching between dark and light modes.
+A sleek, interactive weather dashboard providing real-time weather updates, temperature trends, and daily forecasts. Enjoy a modern UI, responsive charts, theme switching between dark and light modes, and now live weather for your current location!
 
 ---
 
@@ -20,6 +20,7 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
 
 - **Live Weather Data**
   - Current weather conditions for any city
+  - **Get weather for your current location with one click**
   - Temperature, humidity, wind, sunrise, and pressure details
   - Weather icons for clear, cloudy, rainy, and more
 
@@ -45,6 +46,7 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
 ## 🖥️ Dashboard Overview
 
 - Search for any city to view its weather
+- **Click the location icon to instantly get weather for your current location**
 - See current conditions and daily forecast
 - Analyze temperature trends in a responsive chart
 - All data updates in real-time
@@ -57,6 +59,10 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
   - Works on all screen sizes
   - Touch-friendly controls
   - Fluid chart and card layouts
+
+- **Live Location Support**
+  - Uses browser geolocation API to fetch weather for your current position
+  - Secure and permission-based
 
 - **Performance Optimized**
   - Efficient React state management
@@ -118,4 +124,4 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
 
 ---
 
-Get real-time weather updates and enjoy a beautiful, modern weather dashboard experience!
+Get real-time weather updates for any city or your current location and enjoy a beautiful, modern weather dashboard experience!
