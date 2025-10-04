@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Light Mode */
+.light {
+  --bg-primary: #d7eafd;             
+  --bg-secondary: #ffffff;           
+  --text-primary: #222b36;         
+  --text-secondary: #6b7a90;         
+  --card-bg: #ffffff;            
+  --chart-fill: rgba(0, 191, 255, 0.13);
+}
+
+/* Dark Mode */
+.dark {
+  --bg-primary: radial-gradient(ellipse at left 40%, #181c2f 60%, #2b1830 100%);
+  --bg-secondary: rgba(44, 46, 68, 0.85); 
+  --text-primary: #f9fafb;
+  --text-secondary: #b6b8d6;
+  --card-bg: rgba(44, 46, 68, 0.85);
+  --chart-fill: rgba(0, 191, 255, 0.13);
+}
+
+body.dark {
+  background: radial-gradient(ellipse at left 40%, #181c2f 60%, #2b1830 100%);
+  color: #f9fafb;
+}
+
+body {
+  transition-property: background-color, color;
+  transition-duration: 300ms;
+  background: #d7eafd;        
+  color: #222b36;             
+}
+
+.card-shadow {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+}
