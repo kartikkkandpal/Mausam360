@@ -10,7 +10,7 @@ const weatherIcons = {
 const ForecastCard = ({ day, date, temp, weather }) => {
   return (
     <div
-      className="flex flex-col items-center rounded-lg p-2 m-1 min-w-[60px] w-[60px]"
+      className="flex flex-col items-center rounded-lg p-2 m-1 min-w-[76px] w-[76px] shadow-xl"
       style={{
         background: "var(--card-bg)",
         color: "var(--text-primary)",

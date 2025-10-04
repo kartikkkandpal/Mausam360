@@ -32,7 +32,7 @@ const WeatherCard = ({
 }) => {
   return (
     <div
-      className="rounded-xl p-4 shadow flex flex-col items-center w-full max-w-xl" // <-- Added width classes
+      className="rounded-xl p-4 shadow-xl flex flex-col items-center w-full max-w-xl h-full"
       style={{
         background: "var(--bg-secondary)",
         color: "var(--text-primary)",

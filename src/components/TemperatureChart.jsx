@@ -81,15 +81,10 @@ const TemperatureChart = ({ data }) => {
   return (
     <div
       ref={chartRef}
-      className="rounded-2xl card-shadow w-full h-full flex flex-col"
+      className="rounded-xl p-4 shadow-xl flex flex-col items-center w-full max-w-xl"
       style={{
         background: "var(--bg-secondary)",
         color: "var(--text-primary)",
-        position: "relative",
-        flex: 1,
-        minHeight: 0,
-        padding: 0,
-        overflow: "hidden",
       }}
     >
       <div className="font-semibold text-lg tracking-wide px-6 pt-6">
