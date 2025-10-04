@@ -35,7 +35,7 @@ const WeatherCard = ({
 }) => {
   return (
     <div
-      className="rounded-xl p-4 sm:p-6 shadow-xl flex flex-col justify-between w-full max-w-xl h-full min-h-[340px] sm:min-h-[380px]"
+      className="rounded-xl p-4 sm:p-6 shadow-xl flex flex-col justify-between w-full max-w-xl h-full min-h-[320px] sm:min-h-[350px]"
       style={{
         background: "var(--card-bg)",
         color: "var(--text-primary)",
