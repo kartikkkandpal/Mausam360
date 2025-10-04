@@ -2,22 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 
 const TemperatureChart = ({ data }) => {
   const [hovered, setHovered] = useState(null);
-  const [dimensions, setDimensions] = useState({ width: 400, height: 200 });
   const chartRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    if (chartRef.current) {
-      const resize = () => {
+    const resize = () => {
+      if (chartRef.current) {
         const rect = chartRef.current.getBoundingClientRect();
         setDimensions({
           width: rect.width,
           height: rect.height,
         });
-      };
-      resize();
-      window.addEventListener("resize", resize);
-      return () => window.removeEventListener("resize", resize);
-    }
+      }
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   if (!data || data.length === 0) return null;
@@ -31,14 +31,16 @@ const TemperatureChart = ({ data }) => {
     return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
   };
 
+  // Responsive chart sizing
+  const chartWidth = dimensions.width || 400;
+  const chartHeight = dimensions.height || 200;
+  const margin = 42; // Reduced margin for more stretch
+  const innerWidth = chartWidth - margin * 2;
+  const innerHeight = chartHeight - margin * 2;
+
   const temps = data.map((d) => d.temp);
   const minTemp = Math.min(...temps) - 2;
   const maxTemp = Math.max(...temps) + 2;
-  const chartHeight = dimensions.height;
-  const chartWidth = dimensions.width;
-  const margin = 42; 
-  const innerWidth = chartWidth - margin * 2;
-  const innerHeight = chartHeight - margin * 2;
   const pointGap = data.length > 1 ? innerWidth / (data.length - 1) : 0;
 
   // Map temps to y-coordinates (inverted, SVG y=0 is top)
@@ -87,12 +89,13 @@ const TemperatureChart = ({ data }) => {
         flex: 1,
         minHeight: 0,
         padding: 0,
+        overflow: "hidden",
       }}
     >
       <div className="font-semibold text-lg tracking-wide px-6 pt-6">
         Temperature Trends
       </div>
-      <div className="flex-1 w-full h-full m-0 p-0">
+      <div className="flex-1 w-full h-full m-0 p-0" style={{ minHeight: 0 }}>
         <svg
           width="100%"
           height="100%"
