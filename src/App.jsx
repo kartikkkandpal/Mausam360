@@ -24,7 +24,7 @@ const App = () => {
     return (
         <ThemeProvider>
             <div
-                className="min-h-screen flex items-center justify-center"
+                className="min-h-screen flex items-center justify-center px-2 sm:px-4"
                 style={{
                     background: "var(--bg-primary)",
                     color: "var(--text-primary)",
@@ -32,7 +32,7 @@ const App = () => {
                 }}
             >
                 <div
-                    className="w-[900px] rounded-2xl shadow-2xl p-6 flex flex-col gap-6"
+                    className="w-full max-w-[900px] rounded-2xl shadow-2xl p-2 sm:p-4 md:p-6 flex flex-col gap-4 sm:gap-6"
                     style={{
                         background: "var(--bg-secondary)",
                         boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
@@ -40,7 +40,7 @@ const App = () => {
                     }}
                 >
                     {/* Top Bar */}
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-between gap-2 sm:gap-3 flex-col sm:flex-row">
                         <SearchBar onSearch={handleSearch} />
                         <ToggleTheme />
                     </div>
@@ -50,9 +50,9 @@ const App = () => {
                         </div>
                     )}
                     {/* Main Content */}
-                    <div className="flex gap-6 h-[420px]">
+                    <div className="flex flex-col md:flex-row gap-4 sm:gap-6 md:h-[420px]">
                         {/* Left: WeatherCard */}
-                        <div className="flex-1 flex flex-col h-full">
+                        <div className="flex-1 flex flex-col h-full mb-2 md:mb-0">
                             <WeatherCard
                                 city={weather?.name || city}
                                 date={
@@ -77,13 +77,13 @@ const App = () => {
                         {/* Right: TemperatureChart + Forecast */}
                         <div className="flex-1 flex flex-col h-full justify-between">
                             {/* TemperatureChart fills available space */}
-                            <div className="flex-1 flex flex-col justify-between">
+                            <div className="flex-1 flex flex-col justify-between min-h-[220px]">
                                 <TemperatureChart data={chartData} />
                             </div>
                             {/* Forecast at the bottom, no margin below */}
-                            <div>
-                                <div className="font-semibold mt-1 mb-1">Daily Forecast</div>
-                                <div className="flex gap-1">
+                            <div className="mt-2">
+                                <div className="font-semibold">Daily Forecast</div>
+                                <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300">
                                     {forecast.map((item, idx) => (
                                         <ForecastCard key={idx} {...item} />
                                     ))}

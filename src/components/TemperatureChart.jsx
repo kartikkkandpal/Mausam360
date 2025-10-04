@@ -32,9 +32,9 @@ const TemperatureChart = ({ data }) => {
   };
 
   // Responsive chart sizing
-  const chartWidth = dimensions.width || 400;
-  const chartHeight = dimensions.height || 200;
-  const margin = 42; // Reduced margin for more stretch
+  const chartWidth = dimensions.width || 340;
+  const chartHeight = dimensions.height || 180;
+  const margin = 36; // Reduced margin for more stretch
   const innerWidth = chartWidth - margin * 2;
   const innerHeight = chartHeight - margin * 2;
 
@@ -81,13 +81,13 @@ const TemperatureChart = ({ data }) => {
   return (
     <div
       ref={chartRef}
-      className="rounded-xl p-4 shadow-xl flex flex-col items-center w-full max-w-xl"
+      className="rounded-xl p-2 sm:p-4 shadow-xl flex flex-col items-center w-full max-w-full min-w-0"
       style={{
         background: "var(--bg-secondary)",
         color: "var(--text-primary)",
       }}
     >
-      <div className="font-semibold text-lg tracking-wide px-6 pt-6">
+      <div className="font-semibold text-base sm:text-lg tracking-wide px-2 sm:px-6 pt-2 sm:pt-6">
         Temperature Trends
       </div>
       <div className="flex-1 w-full h-full m-0 p-0" style={{ minHeight: 0 }}>
@@ -95,7 +95,7 @@ const TemperatureChart = ({ data }) => {
           width="100%"
           height="100%"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-          className="w-full h-full"
+          className="w-full h-[180px] sm:h-[200px]"
           style={{ display: "block" }}
         >
           {/* Y-axis grid lines and labels */}
@@ -105,7 +105,7 @@ const TemperatureChart = ({ data }) => {
                 x={margin - 16}
                 y={getY(t) + 5}
                 textAnchor="end"
-                fontSize={13}
+                fontSize={12}
                 fill="var(--text-secondary)"
                 style={{ fontWeight: 500, opacity: 0.7 }}
               >
@@ -177,7 +177,7 @@ const TemperatureChart = ({ data }) => {
               x={points[i].x}
               y={chartHeight - margin + 24}
               textAnchor="middle"
-              fontSize={15}
+              fontSize={13}
               fill="var(--text-primary)"
               style={{ fontWeight: 500, opacity: 0.85 }}
             >
@@ -204,7 +204,7 @@ const TemperatureChart = ({ data }) => {
                 x={points[hovered].x}
                 y={points[hovered].y - 36}
                 textAnchor="middle"
-                fontSize={16}
+                fontSize={15}
                 fill="#fff"
                 style={{ fontWeight: 600 }}
               >
@@ -215,7 +215,7 @@ const TemperatureChart = ({ data }) => {
                 x={points[hovered].x}
                 y={points[hovered].y - 14}
                 textAnchor="middle"
-                fontSize={16}
+                fontSize={15}
                 fill="#00bfff"
                 style={{ fontWeight: 600 }}
               >

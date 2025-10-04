@@ -35,7 +35,7 @@ const WeatherCard = ({
 }) => {
   return (
     <div
-      className="rounded-xl p-6 shadow-xl flex flex-col justify-between w-full max-w-xl h-full min-h-[380px]"
+      className="rounded-xl p-4 sm:p-6 shadow-xl flex flex-col justify-between w-full max-w-xl h-full min-h-[340px] sm:min-h-[380px]"
       style={{
         background: "var(--card-bg)",
         color: "var(--text-primary)",
@@ -44,7 +44,7 @@ const WeatherCard = ({
       {/* Top: Date, City, Description */}
       <div className="flex flex-col items-center mb-2">
         <div className="text-xs opacity-80">{date}</div>
-        <div className="text-3xl font-bold mt-1 mb-1 text-center">{city}</div>
+        <div className="text-2xl sm:text-3xl font-bold mt-1 mb-1 text-center">{city}</div>
         <div className="text-sm text-[var(--text-secondary)] mb-2 text-center capitalize">{weatherDesc}</div>
       </div>
       {/* Middle: Icon & Temperature */}
@@ -52,7 +52,7 @@ const WeatherCard = ({
         <div className="mb-2">
           {weatherIcons[weatherMain] || <Cloud size={44} className="text-sky-400" />}
         </div>
-        <div className="text-5xl font-bold drop-shadow mb-1">{temp}°C</div>
+        <div className="text-4xl sm:text-5xl font-bold drop-shadow mb-1">{temp}°C</div>
       </div>
       {/* Bottom: Weather Details */}
       <div className="grid grid-cols-2 gap-2 w-full mt-2">
