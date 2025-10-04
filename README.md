@@ -1,81 +1,121 @@
-# Mausam360 – Weather Forecast App
+# 🌦️ Mausam360 - Weather Dashboard Web App
 
-Mausam360 is a feature-rich, visually engaging weather application built using HTML, CSS, and JavaScript. It offers live weather conditions, a 5-day forecast, temperature trend charts, and UI personalization features such as dark/light mode and °C/°F toggles. With a clean interface and responsive design, Mausam360 ensures a seamless experience across both desktop and mobile devices.
+A sleek, interactive weather dashboard providing real-time weather updates, temperature trends, and daily forecasts. Enjoy a modern UI, responsive charts, and theme switching between dark and light modes.
 
-## Table of Contents
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Tech Stack](#tech-stack)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Live Demo](#live-demo)
-- [License](#license)
+---
 
-## Features
-* **Current Weather Details:** City name, temperature, weather icon, description, wind speed, humidity, UV index, and more.
-* **Live 5-Day Forecast:** Horizontally scrollable forecast cards with icons, day, date, and temperature.
-* **Interactive Chart:** Line chart showing temperature trends over the next few days.
-* **Dark/Light Mode Toggle:** For theme customization based on user preference.
-* **°C / °F Toggle:** Switch between Celsius and Fahrenheit units easily.
-* **Responsive Design:** Mobile-first layout ensuring readability and accessibility.
-* **Geolocation Support:** Fetch weather using your current location.
-* **Animated UI:** Smooth transitions and hover effects for modern UX.
+## 📋 Table of Contents
 
-## Screenshots
-| Darkmode | Lightmode | Responsive Mobile Layout |
-| :------------------: | :----------------------: | :----------------: |
-| ![Darkmode](Darkmode.png) | ![Lightmode](Lightmode.png) | ![Responsive Mobile Layout](ResponsiveLayout.png) |
+- [Features](#-features)
+- [Dashboard Overview](#-dashboard-overview)
+- [Technical Details](#-technical-details)
+- [Run Instructions](#-run-instructions)
+- [Technologies Used](#️-technologies-used)
+- [Author](#-author)
+- [Screenshots](#-screenshots)
 
-## Tech Stack
-* **HTML5:** Structured semantic markup.
-* **CSS3:** Fully responsive and animated UI with media queries.
-* **JavaScript:** API calls, DOM manipulation, dynamic rendering, and interactivity.
-* **Chart.js:** For rendering the temperature trend chart.
-* **OpenWeatherMap API:** Real-time weather data fetching.
+---
 
-## Setup Instructions
+## 🌟 Features
 
-To get this project running locally:
+- **Live Weather Data**
+  - Current weather conditions for any city
+  - Temperature, humidity, wind, sunrise, and pressure details
+  - Weather icons for clear, cloudy, rainy, and more
 
-1. **Clone the Repository**
-    ```bash
-    git clone https://github.com/kartikkkandpal/mausam360.git
-    cd mausam360
-    ```
+- **Temperature Trends**
+  - Interactive chart showing temperature changes over days
+  - Responsive and fills the entire trends box
 
-2. **Files You Should Have:**
-    * `index.html`
-    * `style.css`
-    * `script.js`
+- **Daily Forecast**
+  - 5-day forecast with icons and temperature
+  - Easy-to-read layout
 
-3. **Open in Browser:**
-    Open `index.html` in any modern browser:
-    - Double-click the file
-    - Or open it manually using “Open With” → Your browser
+- **Modern UI**
+  - Glassmorphism cards and dashboard
+  - Vibrant color palette and glowing effects
+  - Accessible, professional design
 
-## Usage
+- **Theme Support**
+  - Toggle between dark and light modes
+  - Smooth transitions and consistent colors
 
-1. Enter a city name in the search bar.
-2. Click the **search icon** or press **Enter**.
-3. View current weather, upcoming forecast, and temperature chart.
-4. Toggle between **Dark/Light Mode** and **°C/°F** using the switches.
-5. Click the **location icon** to auto-fetch your weather data.
+---
 
-## Contributing
+## 🖥️ Dashboard Overview
 
-Contributions and suggestions are welcome!
+- Search for any city to view its weather
+- See current conditions and daily forecast
+- Analyze temperature trends in a responsive chart
+- All data updates in real-time
 
-1. Fork the repository.
-2. Create your branch (`git checkout -b feature/MyFeature`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature/MyFeature`).
-5. Open a Pull Request.
+---
 
-## Live Demo
+## 🔧 Technical Details
 
-Try the app here: [Mausam360 Live](https://mausam360-kartikk.vercel.app/)
+- **Responsive Design**
+  - Works on all screen sizes
+  - Touch-friendly controls
+  - Fluid chart and card layouts
 
-## License
+- **Performance Optimized**
+  - Efficient React state management
+  - Fast updates and smooth transitions
 
-This project is open source and available under the [MIT License](LICENSE).
+---
+
+## 💻 Run Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/kartikkkandpal/Mausam360.git
+   cd Mausam360
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. **Set up your environment variables:**
+   - Create a `.env` file in the root directory.
+   - Add your OpenWeather API key:
+     ```
+     VITE_WEATHER_API_KEY=your_openweather_api_key_here
+     ```
+
+4. Start the app:
+   ```bash
+   npm run dev
+   ```
+
+5. Open Link in Your Browser:
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## 🛠️ Technologies Used
+
+- **Frontend**
+  - React
+  - Tailwind CSS
+  - Modern CSS (Glassmorphism, gradients, transitions)
+  - Open Weather API
+  - Vite
+
+---
+
+## 👤 Author
+
+- [Kartik Kandpal](https://github.com/kartikkkandpal)
+
+## 🖼️ Screenshots
+
+![Mausam360 Lightmode Screenshot](./public/Darkmode.png)
+![Mausam360 Darkmode Screenshot](./public/Lightmode.png)
+
+---
+
+Get real-time weather updates and enjoy a beautiful, modern weather dashboard experience!
