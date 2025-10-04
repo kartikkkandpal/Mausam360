@@ -75,12 +75,14 @@ const App = () => {
                             />
                         </div>
                         {/* Right: TemperatureChart + Forecast */}
-                        <div className="flex-1 flex flex-col gap-4">
+                        <div className="flex-1 flex flex-col h-full justify-between">
+                            {/* TemperatureChart fills available space */}
                             <div className="flex-1 flex flex-col justify-between">
                                 <TemperatureChart data={chartData} />
                             </div>
+                            {/* Forecast at the bottom, no margin below */}
                             <div>
-                                <div className="font-semibold mb-2">Daily Forecast</div>
+                                <div className="font-semibold mt-1 mb-1">Daily Forecast</div>
                                 <div className="flex gap-1">
                                     {forecast.map((item, idx) => (
                                         <ForecastCard key={idx} {...item} />
