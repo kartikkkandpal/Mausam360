@@ -101,9 +101,9 @@ const SearchBar = ({ onSearch }) => {
           className={`
             p-2 rounded-full transition-colors duration-200 outline-none
             ${
-              document.documentElement.classList.contains("dark")
-                ? "hover:bg-gray-700 hover:text-white"
-                : "hover:bg-[var(--bg-primary)] hover:text-[var(--text-primary)]"
+              document.documentElement.classList.contains("light")
+                ? "hover:bg-[var(--bg-primary)] hover:text-[var(--text-primary)]"
+                : "hover:bg-gray-700 hover:text-white"
             }
             active:scale-110
           `}
