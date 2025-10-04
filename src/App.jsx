@@ -32,7 +32,7 @@ const App = () => {
                 }}
             >
                 <div
-                    className="w-[820px] rounded-2xl shadow-2xl p-6 flex flex-col gap-6"
+                    className="w-[900px] rounded-2xl shadow-2xl p-6 flex flex-col gap-6"
                     style={{
                         background: "var(--bg-secondary)",
                         boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
@@ -50,9 +50,9 @@ const App = () => {
                         </div>
                     )}
                     {/* Main Content */}
-                    <div className="flex gap-6">
-                        {/* Left: Weather + Forecast */}
-                        <div className="flex-1 flex flex-col gap-4">
+                    <div className="flex gap-6 h-[420px]">
+                        {/* Left: WeatherCard */}
+                        <div className="flex-1 flex flex-col h-full">
                             <WeatherCard
                                 city={weather?.name || city}
                                 date={
@@ -73,6 +73,12 @@ const App = () => {
                                 sunrise={sunrise}
                                 pressure={weather?.main?.pressure}
                             />
+                        </div>
+                        {/* Right: TemperatureChart + Forecast */}
+                        <div className="flex-1 flex flex-col gap-4">
+                            <div className="flex-1 flex flex-col justify-between">
+                                <TemperatureChart data={chartData} />
+                            </div>
                             <div>
                                 <div className="font-semibold mb-2">Daily Forecast</div>
                                 <div className="flex gap-1">
@@ -80,12 +86,6 @@ const App = () => {
                                         <ForecastCard key={idx} {...item} />
                                     ))}
                                 </div>
-                            </div>
-                        </div>
-                        {/* Right: Chart */}
-                        <div className="flex-1 flex flex-col">
-                            <div className="flex-1 w-full h-full">
-                                <TemperatureChart data={chartData} />
                             </div>
                         </div>
                     </div>
