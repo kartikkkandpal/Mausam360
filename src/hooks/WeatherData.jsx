@@ -2,21 +2,30 @@ import { useState, useEffect } from "react";
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-export const useWeatherData = (city) => {
+export const useWeatherData = (city, coords = null) => {
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!city) return;
     setLoading(true);
     setNotFound(false);
 
+    let weatherUrl, forecastUrl;
+    if (coords) {
+      weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&units=metric`;
+      forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&units=metric`;
+    } else if (city) {
+      weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+      forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+    } else {
+      setLoading(false);
+      return;
+    }
+
     // Current weather
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-    )
+    fetch(weatherUrl)
       .then((res) => {
         if (!res.ok) {
           setNotFound(true);
@@ -32,9 +41,7 @@ export const useWeatherData = (city) => {
       });
 
     // 5-day forecast
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-    )
+    fetch(forecastUrl)
       .then((res) => {
         if (!res.ok) {
           setForecast([]);
@@ -64,7 +71,7 @@ export const useWeatherData = (city) => {
         }
         setLoading(false);
       });
-  }, [city]);
+  }, [city, coords]);
 
   return { weather, forecast, loading, notFound };
 };
