@@ -6,13 +6,13 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
 
 ## 📋 Table of Contents
 
-- [Features](#-features)
-- [Dashboard Overview](#-dashboard-overview)
-- [Technical Details](#-technical-details)
-- [Run Instructions](#-run-instructions)
-- [Technologies Used](#️-technologies-used)
-- [Author](#-author)
-- [Screenshots](#-screenshots)
+- [🌟 Features](#-features)
+- [🖥️ Dashboard Overview](#-dashboard-overview)
+- [🔧 Technical Details](#-technical-details)
+- [💻 Run Instructions](#-run-instructions)
+- [🛠️ Technologies Used](#-technologies-used)
+- [👤 Author](#-author)
+- [Screenshots](#screenshots)
 
 ---
 
@@ -117,7 +117,7 @@ A sleek, interactive weather dashboard providing real-time weather updates, temp
 
 - [Kartik Kandpal](https://github.com/kartikkkandpal)
 
-## 🖼️ Screenshots
+## Screenshots
 
 ![Mausam360 Lightmode Screenshot](./public/Darkmode.png)
 ![Mausam360 Darkmode Screenshot](./public/Lightmode.png)
